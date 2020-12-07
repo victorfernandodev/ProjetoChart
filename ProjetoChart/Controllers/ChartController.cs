@@ -16,21 +16,15 @@ namespace ProjetoChart.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            Produto objProductModel = new Produto();
-            objProductModel.NomeProduto = "Carro";
-            objProductModel.Quantidade = 10;
-            return View(objProductModel);
+            return View();
         }
+        
 
         public ActionResult GetChart()
         {
-            return Json(_context.Produto
-                // you may add some query to your entitles 
-                //.Where()
-                .Select(p => new { p.NomeProduto, p.Quantidade}),
-                    JsonRequestBehavior.AllowGet);
+            return Json(_context.Produto.Select(p => new { p.NomeProduto,p.Quantidade}));
         }
     }
 }
